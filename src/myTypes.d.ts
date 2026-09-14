@@ -1,4 +1,3 @@
-
 export interface Friend {
     name: string;
     phone: string;
