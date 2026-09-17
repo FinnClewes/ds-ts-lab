@@ -1,6 +1,8 @@
 import { colleagues, friends } from './01-basics'
 import {Friend, Colleague, EmailContact } from './myTypes'
 
+//  -------------------
+// Create a function that takes a Friend object and increments their age by 1, returning a string with their name and new age.
 function older(f: Friend) {
      f.age += 1
      return `${f.name} is now ${f.age}` 
@@ -17,6 +19,8 @@ function highestExtension(cs: Colleague[]) {
 }
 console.log(highestExtension(colleagues.current));
 
+//   -------------------
+// Add a colleague to the colleagues.current array with a new extension number.
 function addColleague(c: Colleague[], name: string, department: string, email: string) {
     const extension = highestExtension(colleagues.current).contact.extension + 1;
 
@@ -36,18 +40,28 @@ function addColleague(c: Colleague[], name: string, department: string, email: s
 addColleague(colleagues.current, "Sheild O Connell", "HR", "soc@here.com");
 console.log(colleagues.current.filter((c) => c.name === "Sheild O Connell"));
 
+//   -------------------
+// Sort colleagues by extension number or name length and return an array of EmailContact objects.
 function sortColleagues(
   colleagues: Colleague[],
-  sorter: (c1: Colleague, c2: Colleague) => number
+  sorter: (c1: Colleague, c2: Colleague) => number,
+  max? : number
 ): EmailContact[] {
-  const sorted = colleagues.sort(sorter); // Colleague[] inferred
-  const result: EmailContact[] = sorted.map((ce) => ({ name: ce.name, email: ce.contact.email }));
-  return result 
+  let end = colleagues.length;
+  if (max !== undefined) {
+     end = max < 2 ? 1 : max
+  }
+  const sorted = colleagues.sort(sorter);
+  const fullResult =  sorted.map((ce) => ({ name: ce.name, email: ce.contact.email }));
+  return fullResult.slice(0,end)
 }
+// Test invocations
+console.log(sortColleagues(colleagues.current, (a, b) => (a.contact.extension - b.contact.extension),3));
+console.log(sortColleagues(colleagues.current, (a, b) => (a.name.length - b.name.length),1));
 
-console.log(sortColleagues(colleagues.current, (a, b) => a.contact.extension - b.contact.extension));
-console.log(sortColleagues(colleagues.current, (a, b) => a.name.length - b.name.length));
 
+//  -------------------
+// Find friends based on a provided finder function and return an array of their names.
 function findFriends(
   friends: Friend[],
   finder: (friend: Friend) => boolean
