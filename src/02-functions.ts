@@ -7,7 +7,7 @@ function older(f: Friend) {
      f.age += 1
      return `${f.name} is now ${f.age}` 
 }
-console.log(older(friends[0]))
+// console.log(older(friends[0]))
 
 //   -------------------
 // Find the colleague with the highest extension number.
@@ -17,7 +17,7 @@ function highestExtension(cs: Colleague[]) {
   );
   return result[cs.length - 1];
 }
-console.log(highestExtension(colleagues.current));
+// console.log(highestExtension(colleagues.current));
 
 //   -------------------
 // Add a colleague to the colleagues.current array with a new extension number.
@@ -34,11 +34,11 @@ function addColleague(c: Colleague[], name: string, department: string, email: s
     };
 
     colleagues.current.push(colleague);
-    console.log(`${name} has been added to the colleagues list with extension ${extension}.`);
+    // console.log(`${name} has been added to the colleagues list with extension ${extension}.`);
 }
 
 addColleague(colleagues.current, "Sheild O Connell", "HR", "soc@here.com");
-console.log(colleagues.current.filter((c) => c.name === "Sheild O Connell"));
+// console.log(colleagues.current.filter((c) => c.name === "Sheild O Connell"));
 
 //   -------------------
 // Sort colleagues by extension number or name length and return an array of EmailContact objects.
@@ -56,8 +56,8 @@ function sortColleagues(
   return fullResult.slice(0,end)
 }
 // Test invocations
-console.log(sortColleagues(colleagues.current, (a, b) => (a.contact.extension - b.contact.extension),3));
-console.log(sortColleagues(colleagues.current, (a, b) => (a.name.length - b.name.length),1));
+// console.log(sortColleagues(colleagues.current, (a, b) => (a.contact.extension - b.contact.extension),3));
+// console.log(sortColleagues(colleagues.current, (a, b) => (a.name.length - b.name.length),1));
 
 
 //  -------------------
@@ -70,5 +70,19 @@ function findFriends(
   return result;
 }
 
-console.log(findFriends(friends, (friend) => friend.name.startsWith('Pa')));
-console.log(findFriends(friends, (friend) => friend.age < 35));
+//console.log(findFriends(friends, (friend) => friend.name.startsWith('Pa')));
+//console.log(findFriends(friends, (friend) => friend.age < 35));
+
+
+//  -------------------
+// Add an interest to a Friend object and return the updated Friend object.
+function addInterest(friend: Friend, interest: string): Friend {
+  if (!friend.interests) {
+    friend.interests = [];
+  }
+  friend.interests.push(interest);
+  return friend;
+}
+console.log(`${friends[0].name} has addded to interests ${friends[0].interests?.join(', ')}.`);
+console.log(addInterest(friends[0], 'Politics'))
+
