@@ -86,3 +86,16 @@ function addInterest(friend: Friend, interest: string): Friend {
 console.log(`${friends[0].name} has addded to interests ${friends[0].interests?.join(', ')}.`);
 console.log(addInterest(friends[0], 'Politics'))
 
+// -------------------
+// Sort friends by age
+function sort<Friend>(data: Friend[], sorter: (a: Friend, b: Friend) => number): Friend[] {
+  return data.sort(sorter);
+}
+console.log(sort<Friend>(friends, (a, b) => a.age - b.age));
+// Sort colleagues by extension number
+console.log(
+  sort<Colleague>(
+    colleagues.current,
+    (a, b) => a.contact.extension - b.contact.extension
+  )
+);
